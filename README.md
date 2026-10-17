@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Vibe Coding Course
 
-## Getting Started
+Aplikasi web berbasis Next.js untuk pengalaman belajar Vibe Coding. Halaman beranda menautkan ke katalog kursus; repo juga memuat rute kursus, pelajaran, dashboard, dan halaman pengajar, serta kode backend Convex.
 
-First, run the development server:
+## Menjalankan secara lokal
+
+Prasyarat: Node.js dan npm. Versi minimum Node.js tidak ditetapkan di `package.json`.
 
 ```bash
+npm ci
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Buka [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Perintah lain yang tersedia:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run lint
+npm run build
+npm run start
+```
 
-## Learn More
+`npm run start` menjalankan server Next.js; jalankan `npm run build` terlebih dahulu untuk menyiapkan build.
 
-To learn more about Next.js, take a look at the following resources:
+## Cakupan yang terlihat di repositori
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Beranda dengan tautan menuju `/courses`.
+- Rute katalog `/courses`, halaman kursus `/courses/[courseId]`, dan halaman pelajaran `/courses/[courseId]/lessons/[lessonId]`.
+- Rute `/dashboard` dan `/teacher`.
+- Skema Convex untuk pengguna, kursus, pelajaran, pendaftaran, dan progres belajar, beserta modul query, mutation, dan seed yang tercantum di `convex/`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Keberadaan halaman dan modul tersebut tidak dengan sendirinya membuktikan bahwa seluruh alur pengguna sudah berfungsi atau siap digunakan.
 
-## Deploy on Vercel
+## Struktur utama
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- `src/app/` — rute dan tata letak Next.js.
+- `src/components/` — komponen aplikasi bersama.
+- `convex/` — skema dan fungsi backend Convex.
+- `frontend/slices/` — kontrak dan manifest slice untuk courses dan dashboard.
+- `public/` — aset statis.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Catatan konfigurasi dan verifikasi
+
+Proyek memiliki dependensi Convex, tetapi repositori yang terlihat tidak mendokumentasikan langkah konfigurasi deployment Convex atau nama variabel lingkungan yang diperlukan. Periksa konfigurasi backend sebelum mengandalkan fitur yang memerlukan koneksi Convex.
+
+`package.json` menyediakan skrip dev, build, start, dan lint; tidak menyediakan skrip test. Perintah lint dan build di atas adalah cara menjalankan pemeriksaan yang tersedia, bukan klaim bahwa pemeriksaan tersebut telah berhasil. Deployment dan kesiapan produksi tidak ditetapkan oleh dokumentasi repo ini.
