@@ -1,7 +1,9 @@
 import { internalMutation } from "./_generated/server";
+import { v } from "convex/values";
 
 export default internalMutation({
   args: {},
+  returns: v.null(),
   handler: async (ctx) => {
     const teacherId = await ctx.db.insert("users", {
       name: "Sensei Vibe",
@@ -34,5 +36,6 @@ export default internalMutation({
       content: "Pilih font yang enak dilihat, tema VS Code yang menenangkan (seperti Tokyo Night atau Synthwave 84), dan siapkan playlist lo-fi favoritmu.",
       order: 2,
     });
+    return null;
   },
 });

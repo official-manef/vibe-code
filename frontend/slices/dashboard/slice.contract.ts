@@ -1,6 +1,6 @@
-import { Doc } from "../../../convex/_generated/dataModel";
+import type { Doc } from "../../../convex/_generated/dataModel";
 
 export interface DashboardContract {
-  user: Doc<"users">;
-  courses: Array<any>;
+  user: Omit<Doc<"users">, "tokenIdentifier">;
+  courses: Array<Doc<"courses"> & { totalLessons?: number; completedLessons?: number }>;
 }

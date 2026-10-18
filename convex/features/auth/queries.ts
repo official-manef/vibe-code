@@ -1,10 +1,13 @@
 import { query } from "../../_generated/server";
 import { v } from "convex/values";
+import { currentUser, publicUser } from "../../_shared/auth";
+import { user } from "../../_shared/validators";
 
-// Returns the current user (mocked to the first user for now)
 export const me = query({
   args: {},
+  returns: v.union(user, v.null()),
   handler: async (ctx) => {
-    return await ctx.db.query("users").first();
+    const authenticated = await currentUser(ctx);
+    return authenticated ? publicUser(authenticated) : null;
   },
 });
