@@ -9,17 +9,19 @@ export function CreateCourseForm({ onComplete }: { onComplete: () => void }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    setError("");
     try {
       await createCourse({ title, description });
       setTitle("");
       setDescription("");
       onComplete();
-    } catch (error) {
-      console.error(error);
+    } catch {
+      setError("Kursus gagal disimpan. Periksa sesi dan akses guru Anda.");
     } finally {
       setLoading(false);
     }
@@ -28,6 +30,7 @@ export function CreateCourseForm({ onComplete }: { onComplete: () => void }) {
   return (
     <form onSubmit={handleSubmit} className="bg-gray-50 p-6 rounded-2xl mb-8 border border-gray-200">
       <h3 className="text-xl font-bold mb-4">Buat Kursus Baru</h3>
+      {error && <p role="alert" className="mb-4 text-red-700">{error}</p>}
       <div className="space-y-4">
         <div>
           <label className="block text-sm font-medium mb-1">Judul Kursus</label>

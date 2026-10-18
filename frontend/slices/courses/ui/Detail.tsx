@@ -4,10 +4,15 @@ import { api } from "../../../../convex/_generated/api";
 import { Play } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
+import { AccessNotice } from "@/components/AccessNotice";
+import type { Id } from "../../../../convex/_generated/dataModel";
+import { useState } from "react";
 
-export function Detail({ courseId }: { courseId: any }) {
+export function Detail({ courseId }: { courseId: Id<"courses"> }) {
   const course = useQuery(api.features.courses.queries.getById, { id: courseId });
+  const user = useQuery(api.features.auth.queries.me);
   const enroll = useMutation(api.features.courses.mutations.enroll);
+  const [message, setMessage] = useState("");
 
   if (course === undefined) return <div className="p-20 text-center">Loading course...</div>;
   if (!course) return <div className="p-20 text-center">Course not found</div>;
@@ -20,11 +25,21 @@ export function Detail({ courseId }: { courseId: any }) {
         <Button
           variant="secondary"
           className="bg-white text-blue-600 rounded-xl font-bold px-8"
-          onClick={() => enroll({ courseId })}
+          disabled={!user}
+          onClick={async () => {
+            try {
+              await enroll({ courseId });
+              setMessage("Pendaftaran berhasil. Pilih pelajaran di bawah.");
+            } catch {
+              setMessage("Pendaftaran gagal. Periksa sesi dan akses akun Anda.");
+            }
+          }}
         >
           Daftar Sekarang
         </Button>
       </div>
+      {user === null && <AccessNotice />}
+      {message && <p role="status" className="mb-6">{message}</p>}
 
       <h2 className="text-2xl font-bold mb-6">Kurikulum</h2>
       <div className="space-y-4">

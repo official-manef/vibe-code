@@ -6,11 +6,14 @@ import { PlusCircle } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { CreateCourseForm } from "./CreateCourseForm";
+import { AccessNotice } from "@/components/AccessNotice";
 
 export function TeacherDashboard() {
-  const data = useQuery(api.features.dashboard.queries.getTeacherDashboard);
+  const user = useQuery(api.features.auth.queries.me);
+  const data = useQuery(api.features.dashboard.queries.getTeacherDashboard, user?.role === "TEACHER" ? {} : "skip");
   const [showCreate, setShowCreate] = useState(false);
 
+  if (user !== undefined && user?.role !== "TEACHER") return <AccessNotice teacher />;
   if (data === undefined) return <div className="p-20 text-center">Loading dashboard...</div>;
 
   return (

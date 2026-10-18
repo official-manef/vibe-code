@@ -5,6 +5,8 @@ import { Id } from "../../../../convex/_generated/dataModel";
 import { ChevronLeft, CheckCircle } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
+import { AccessNotice } from "@/components/AccessNotice";
+import { useState } from "react";
 
 export function LessonView({
   courseId,
@@ -15,12 +17,15 @@ export function LessonView({
 }) {
   const user = useQuery(api.features.auth.queries.me);
   const lesson = useQuery(api.features.courses.queries.getLesson,
-    user ? { lessonId, userId: user._id } : "skip"
+    user ? { lessonId } : "skip"
   );
   const complete = useMutation(api.features.courses.mutations.completeLesson);
+  const [message, setMessage] = useState("");
 
-  if (user === undefined || lesson === undefined) return <div className="p-20 text-center">Loading lesson...</div>;
-  if (!lesson) return <div className="p-20 text-center">Lesson not found</div>;
+  if (user === undefined) return <div className="p-20 text-center">Loading account...</div>;
+  if (!user) return <AccessNotice />;
+  if (lesson === undefined) return <div className="p-20 text-center">Loading lesson...</div>;
+  if (!lesson || lesson.courseId !== courseId) return <div role="status" className="p-20 text-center">Pelajaran tidak tersedia. Daftar ke kursus yang sesuai atau gunakan akun pengajar pemilik kursus.</div>;
 
   return (
     <div className="max-w-3xl mx-auto p-8 lg:p-16">
@@ -36,7 +41,15 @@ export function LessonView({
           <Button
             size="lg"
             className="rounded-2xl px-10 py-6 text-lg font-bold shadow-lg shadow-blue-100"
-            onClick={() => complete({ lessonId })}
+            disabled={!lesson.canComplete}
+            onClick={async () => {
+              try {
+                await complete({ lessonId });
+                setMessage("");
+              } catch {
+                setMessage("Progres gagal disimpan. Periksa sesi dan pendaftaran kursus Anda.");
+              }
+            }}
           >
             Tandai Selesai <CheckCircle className="ml-2" />
           </Button>
@@ -46,6 +59,8 @@ export function LessonView({
           </div>
         )}
       </div>
+      {!lesson.canComplete && <p className="mt-4">Daftar ke kursus untuk menyimpan progres belajar.</p>}
+      {message && <p role="status" className="mt-4">{message}</p>}
     </div>
   );
 }

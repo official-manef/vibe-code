@@ -4,10 +4,13 @@ import { api } from "../../../../convex/_generated/api";
 import Link from "next/link";
 import { Trophy, BookOpen, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { AccessNotice } from "@/components/AccessNotice";
 
 export function StudentDashboard() {
-  const data = useQuery(api.features.dashboard.queries.getStudentDashboard);
+  const user = useQuery(api.features.auth.queries.me);
+  const data = useQuery(api.features.dashboard.queries.getStudentDashboard, user ? {} : "skip");
 
+  if (user === null) return <AccessNotice />;
   if (data === undefined) return <div className="p-20 text-center">Loading dashboard...</div>;
 
   return (
@@ -24,7 +27,7 @@ export function StudentDashboard() {
 
       <h2 className="text-xl font-bold mb-6">Kursus Saya</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {data.courses.map((course: any) => {
+        {data.courses.map((course) => {
           if (!course) return null;
           const percentage = course.totalLessons > 0
             ? Math.round((course.completedLessons / course.totalLessons) * 100)
