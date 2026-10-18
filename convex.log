@@ -1,0 +1,88 @@
+▌ Developing against deployment:
+▌ [Local] Port 3210 • No Convex account (run npx convex login to link to a project)
+▌ └─ http://127.0.0.1:3210
+Convex AI files are not installed. Run npx convex ai-files install to get started or npx convex ai-files disable to hide this message.
+Downloading Convex dashboard
+- Preparing Convex functions...
+
+[32m✔[39m 15:52:55 Convex functions ready! (455.72ms)
+7/4/2026, 3:54:23 PM [CONVEX Q(features/courses/queries:getById)] ArgumentValidationError: Object is missing the required field `id`. Consider wrapping the field validator in `v.optional(...)` if this is expected.
+
+Object: {}
+Validator: v.object({id: v.id("courses")})
+
+
+7/4/2026, 3:54:23 PM [CONVEX Q(features/courses/queries:getById)] ArgumentValidationError: Object is missing the required field `id`. Consider wrapping the field validator in `v.optional(...)` if this is expected.
+
+Object: {}
+Validator: v.object({id: v.id("courses")})
+
+
+7/4/2026, 3:57:27 PM [CONVEX Q(features/courses/queries:getById)] ArgumentValidationError: Object is missing the required field `id`. Consider wrapping the field validator in `v.optional(...)` if this is expected.
+
+Object: {}
+Validator: v.object({id: v.id("courses")})
+
+
+7/4/2026, 3:58:32 PM [CONVEX Q(features/courses/queries:getById)] ArgumentValidationError: Object is missing the required field `id`. Consider wrapping the field validator in `v.optional(...)` if this is expected.
+
+Object: {}
+Validator: v.object({id: v.id("courses")})
+
+
+7/4/2026, 3:58:32 PM [CONVEX Q(features/courses/queries:getById)] ArgumentValidationError: Object is missing the required field `id`. Consider wrapping the field validator in `v.optional(...)` if this is expected.
+
+Object: {}
+Validator: v.object({id: v.id("courses")})
+
+
+7/4/2026, 3:59:46 PM [CONVEX Q(features/courses/queries:getLesson)] ArgumentValidationError: Value does not match validator.
+Path: .userId
+Value: "user-id"
+Validator: v.id("users")
+
+
+7/4/2026, 3:59:46 PM [CONVEX Q(features/courses/queries:getLesson)] ArgumentValidationError: Value does not match validator.
+Path: .userId
+Value: "user-id"
+Validator: v.id("users")
+
+
+7/4/2026, 4:01:21 PM [CONVEX Q(features/courses/queries:getLesson)] ArgumentValidationError: Value does not match validator.
+Path: .userId
+Value: "user-id"
+Validator: v.id("users")
+
+
+7/4/2026, 4:01:21 PM [CONVEX Q(features/courses/queries:getLesson)] ArgumentValidationError: Value does not match validator.
+Path: .userId
+Value: "user-id"
+Validator: v.id("users")
+
+
+7/4/2026, 4:02:27 PM [CONVEX Q(features/courses/queries:getLesson)] ArgumentValidationError: Value does not match validator.
+Path: .userId
+Value: "user-id"
+Validator: v.id("users")
+
+
+7/4/2026, 4:02:27 PM [CONVEX Q(features/courses/queries:getLesson)] ArgumentValidationError: Value does not match validator.
+Path: .userId
+Value: "user-id"
+Validator: v.id("users")
+
+
+- Preparing Convex functions...
+
+[32m✔[39m 16:04:47 Convex functions ready! (332.35ms)
+- Preparing Convex functions...
+
+[32m✔[39m 16:05:13 Convex functions ready! (262.28ms)
+- Preparing Convex functions...
+
+[32m✔[39m Added table indexes:
+  [+] courses.by_teacher   teacherId, _creationTime
+✔ 16:27:36 Convex functions ready! (1.24s)
+- Preparing Convex functions...
+
+[32m✔[39m 16:27:39 Convex functions ready! (325.21ms)

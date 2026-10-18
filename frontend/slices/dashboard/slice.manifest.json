@@ -1,0 +1,4 @@
+{
+  "dependencies": ["convex"],
+  "tables": ["courses", "enrollments", "progress", "lessons"]
+}
