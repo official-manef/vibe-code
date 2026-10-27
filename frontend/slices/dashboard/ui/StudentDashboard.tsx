@@ -24,7 +24,7 @@ export function StudentDashboard() {
 
       <h2 className="text-xl font-bold mb-6">Kursus Saya</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {data.courses.map((course: any) => {
+        {data.courses.map((course) => {
           if (!course) return null;
           const percentage = course.totalLessons > 0
             ? Math.round((course.completedLessons / course.totalLessons) * 100)

@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import { LessonView } from "@/features/courses/ui/LessonView";
+import type { Id } from "../../../../../../convex/_generated/dataModel";
 
 export default async function LessonPage({
   params
@@ -10,8 +11,8 @@ export default async function LessonPage({
   return (
     <Suspense fallback={<div className="p-20 text-center">Loading...</div>}>
       <LessonView
-        courseId={courseId as any}
-        lessonId={lessonId as any}
+        courseId={courseId as Id<"courses">}
+        lessonId={lessonId as Id<"lessons">}
       />
     </Suspense>
   );
