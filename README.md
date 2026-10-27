@@ -4,11 +4,11 @@ Aplikasi web berbasis Next.js untuk pengalaman belajar Vibe Coding. Halaman bera
 
 ## Menjalankan secara lokal
 
-Prasyarat: Node.js dan npm. Versi minimum Node.js tidak ditetapkan di `package.json`.
+Prasyarat: Node.js dan bun. Versi minimum Node.js tidak ditetapkan di `package.json`.
 
 ```bash
-npm ci
-npm run dev
+bun install --frozen-lockfile
+bun run dev
 ```
 
 Buka [http://localhost:3000](http://localhost:3000).
@@ -16,12 +16,12 @@ Buka [http://localhost:3000](http://localhost:3000).
 Perintah lain yang tersedia:
 
 ```bash
-npm run lint
-npm run build
-npm run start
+bun run lint
+bun run build
+bun run start
 ```
 
-`npm run start` menjalankan server Next.js; jalankan `npm run build` terlebih dahulu untuk menyiapkan build.
+`bun run start` menjalankan server Next.js; jalankan `bun run build` terlebih dahulu untuk menyiapkan build.
 
 ## Cakupan yang terlihat di repositori
 
