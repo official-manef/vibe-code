@@ -1,11 +1,12 @@
 "use client";
 import { useQuery, useMutation } from "convex/react";
 import { api } from "../../../../convex/_generated/api";
+import type { Id } from "../../../../convex/_generated/dataModel";
 import { Play } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 
-export function Detail({ courseId }: { courseId: any }) {
+export function Detail({ courseId }: { courseId: Id<"courses"> }) {
   const course = useQuery(api.features.courses.queries.getById, { id: courseId });
   const enroll = useMutation(api.features.courses.mutations.enroll);
 
